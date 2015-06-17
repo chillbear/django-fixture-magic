@@ -34,4 +34,4 @@ class Command(BaseCommand):
         except TypeError:
             self.stdout.write(json.dumps(output, indent=4))
         else:
-            self.stdout.write(json.dumps(output, sort_keys=True, indent=4)
+            self.stdout.write(json.dumps(output, sort_keys=True, indent=4))
