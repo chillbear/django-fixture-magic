@@ -41,4 +41,4 @@ class Command(BaseCommand):
         data = reorder_json(json.loads(data), dump_settings.get('order', []),
                 ordering_cond=dump_settings.get('order_cond',{}))
 
-        json.dump(data, self.stdout, indent=4)
+        self.stdout.write(json.dumps(data, indent=4))
