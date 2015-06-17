@@ -5,14 +5,6 @@ except ImportError:
 
 from django.core.management.base import BaseCommand
 
-def write_json(output):
-    try:
-        # check our json import supports sorting keys
-        json.dumps([1], sort_keys=True)
-    except TypeError:
-        print json.dumps(output, indent=4)
-    else:
-        print json.dumps(output, sort_keys=True, indent=4)
 
 class Command(BaseCommand):
     help = ('Merge a series of fixtures and remove duplicates.')
@@ -23,6 +15,7 @@ class Command(BaseCommand):
         Load a bunch of json files.  Store the pk/model in a seen dictionary.
         Add all the unseen objects into output.
         """
+
         output = []
         seen = {}
 
@@ -35,4 +28,10 @@ class Command(BaseCommand):
                     seen[key] = 1
                     output.append(object)
 
-        write_json(output)
+        try:
+            # check our json import supports sorting keys
+            json.dump([1], self.stdout, sort_keys=True)
+        except TypeError:
+            json.dump(output, self.stdout, indent=4)
+        else:
+            json.dump(output, self.stdout, sort_keys=True, indent=4)
