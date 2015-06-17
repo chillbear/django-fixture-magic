@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
         try:
             # check our json import supports sorting keys
-            self.stdout.write(json.dumps([1], sort_keys=True))
+            json.dumps([1], sort_keys=True)
         except TypeError:
             self.stdout.write(json.dumps(output, indent=4))
         else:
